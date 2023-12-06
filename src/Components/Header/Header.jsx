@@ -1,6 +1,5 @@
 import React from 'react'
-import './Header/Header.scss'
-
+import './Header.scss';
 const Header = () => (
     <div className='Header'>
         <h2> Using go and React Chat App</h2>
