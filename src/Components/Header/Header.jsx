@@ -5,6 +5,6 @@ const Header = () => (
         <h2> Using go and React Chat App</h2>
         
     </div>
-)
+);
 
 export default Header;

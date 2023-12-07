@@ -3,29 +3,28 @@ import Header from './Components/Header/Header';
 import ChatHistory from './Components/ChatHistory/ChatHistory';
 import ChatInput from './Components/ChatInput/ChatInput';
 import './App.css';
-import { connect, sendMsg } from './Api/index';
+import { connect, sendMsg } from './Api';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ChatHistory: [],
-    };
+      chatHistory: []
+    }
   }
 
   componentDidMount() {
-    // Assuming connect is a function to establish a WebSocket connection
     connect((msg) => {
-      console.log("New Message");
-      this.setState((prevState) => ({
-        ChatHistory: [...prevState.ChatHistory, msg],
-      }));
+      console.log("New Message")
+      this.setState(prevState => ({
+        chatHistory: [...prevState.chatHistory, msg]
+      }))
       console.log(this.state);
     });
   }
 
-  send(event){
-    if (event.keyCode === 13){
+  send(event) {
+    if (event.keyCode === 13) {
       sendMsg(event.target.value);
       event.target.value = "";
     }
@@ -33,9 +32,9 @@ class App extends Component {
 
   render() {
     return (
-      <div className='App'>
+      <div className="App">
         <Header />
-        <ChatHistory ChatHistory={this.state.ChatHistory} />
+        <ChatHistory chatHistory={this.state.chatHistory} />
         <ChatInput send={this.send} />
       </div>
     );

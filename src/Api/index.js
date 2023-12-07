@@ -1,30 +1,29 @@
-var socket = new WebSocket('ws://localhost:3000/ws')
+var socket = new WebSocket('ws://localhost:9000/ws');
 
 let connect = (cb) => {
-    console.log("Connecting")
+  console.log("connecting")
 
-    socket.onopen = () =>{
-        console.log("Successfully connected")
-    }
+  socket.onopen = () => {
+    console.log("Successfully Connected");
+  }
+  
+  socket.onmessage = (msg) => {
+    console.log("Message from WebSocket: ", msg);
+    cb(msg);
+  }
 
-    socket.onmessage = (msg) => {
-        console.log("Message from websocket:", msg)
-    }
+  socket.onclose = (event) => {
+    console.log("Socket Closed Connection: ", event)
+  }
 
-    socket.onclose = (event) =>{
-        console.log("socket closed connection", event)
-    }
-
-    socket.onerror = (error) => {
-        console.log("socket was not working", error)
-    }
-
-
-}
+  socket.onerror = (error) => {
+    console.log("Socket Error: ", error)
+  }
+};
 
 let sendMsg = (msg) => {
-    console.log("sending msg:", msg);
-    socket.send(msg);
-}
+  console.log("sending msg: ", msg);
+  socket.send(msg);
+};
 
-export {connect, sendMsg};
+export { connect, sendMsg };
